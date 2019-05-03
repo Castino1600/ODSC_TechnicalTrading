@@ -30,8 +30,7 @@ df          <-data.frame(CMG$CMG.Close,
 
 # Create a trading indicator
 ?Lag
-df$tradeSig <- Lag(ifelse(df$SMA > df$SMA.1  , 1, 0)) # not discussing shorting stocks (-1)
-
+df$Lag.1 <- Lag(ifelse(df$SMA > df$SMA.1  , 1, 0)) # not discussing shorting stocks (-1)
 
 # Examine
 df[325:335,]
