@@ -22,16 +22,16 @@ paste0('http://magic.tcgplayer.com/db/search_result.asp?Set_Name=',nam)
 
 # Data Integrity! High for  Genesis Wave was corrected in CSV
 #cards <- read.csv("Guilds_10_16_18.csv" , fileEncoding="latin1")
-cards <- read.csv('war_ofThe_Spark_4_26_2019.csv') 
+cards <- read.csv('IconicMasters_7_25_18.csv')
 
 # Examine
 head(cards)
 
 # Single pack simulation; packsPerFoil is usually 6 depends on set
-crackPack(guildsOfRavnica, packsPerFoil = 6)
+crackPack(cards, packsPerFoil = 6)
 
 # Get another pack
-onePack <- crackPack(guildsOfRavnica,packsPerFoil = 6)
+onePack <- crackPack(cards,packsPerFoil = 6)
 
 # Simulate market valuation at the pack level
 cardValues(onePack, worthlessCommons = T, verbose = F)
@@ -42,7 +42,7 @@ cardVals
 sum(cardVals$TCGdistPrice)
 
 # Let's open a box of booster packs; usually 36 but not always
-simBox <- openBox(guildsOfRavnica, 
+simBox <- openBox(cards, 
                   numPacks       = 36, 
                   packsPerMythic = 8, 
                   packsPerFoil   = 6,
@@ -54,7 +54,7 @@ simBox <- openBox(guildsOfRavnica,
 # What about opening 100 boxes (3600 packs)
 boxSim <-list()
 for (i in 1:100){
-  boxes <- openBox(guildsOfRavnica, 
+  boxes <- openBox(cards, 
                    numPacks       = 36, 
                    packsPerMythic = 8, 
                    packsPerFoil   = 6, 
@@ -86,7 +86,7 @@ head(indBoxes)
 boxAVG <- mean(indBoxes[,2])
 
 # Plot and Review 
-boxPrice <- 94
+boxPrice <- 190
 hist(unlist(indBoxes[,2]), main='Guilds of Ravnica')
 abline(v=boxPrice,col="red")
 text(boxPrice,10,'cost', col='red', pos=1,srt=90, cex=1)
